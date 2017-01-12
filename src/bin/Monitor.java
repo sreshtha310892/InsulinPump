@@ -1,10 +1,13 @@
 package bin;
+
 import org.jfree.chart.*;
 import org.jfree.chart.axis.*;
 import org.jfree.chart.plot.*;
 import org.jfree.data.time.*;
 
-import bin.GUI.PanelProgress;
+import com.sun.javafx.scene.control.skin.ButtonSkin;
+
+import main.GUI.PanelProgress;
 
 import java.awt.*;
 
@@ -72,11 +75,16 @@ class Monitor {
                 BloodSugar.timeSeriesBloodSugar.addOrUpdate(millisecond, BloodSugar.getBloodSugar());
             
                 // set blood sugar value in Textfield
-                PanelProgress.bloodSugarText.setText(""+BloodSugar.getBloodSugar());
+                PanelProgress.bloodSugarLabel.setText(""+BloodSugar.getBloodSugar());
                 
                 if(BloodSugar.getBloodSugar().intValue() > 250){
                   	
                   	Component frame = null;
+                  	Simulation.stopSimulation();
+                  	
+                  	
+                  	
+                  	
           			JOptionPane.showMessageDialog(frame,
                       	    "Emergency.",
                       	    "Emergency",
