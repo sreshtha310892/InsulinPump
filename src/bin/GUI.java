@@ -4,11 +4,13 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 import java.math.*;
 
 class GUI {
 
     public Container BOTTOM_left;
+   
 
     GUI(String mode) {
         try {
@@ -17,18 +19,28 @@ class GUI {
             System.out.println(e.toString());
         }
 
-        // Build the output window frame1.
+        // Build the output window frame.
         JFrame frame = new JFrame("Insulin Glucagon Pump");
         frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
         frame.getContentPane().add(new PanelAutomatic(mode));
         frame.pack();
         frame.setVisible(true);
+        
+        
     }
+    
+   
 
     public class PanelAutomatic extends JPanel {
         public PanelAutomatic(String mode) {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            add(new PanelConfiguration());
+            
+            if("Manual".equals(mode)){
+              add(new PanelManualConfiguration());
+            } 
+            else{
+                add(new PanelConfiguration());   
+            }
             add(new PanelMonitoring());
             if("Manual".equals(mode)) {
                 add(new PanelManual());
@@ -38,6 +50,121 @@ class GUI {
         }
     }
 
+    public class PanelManualConfiguration extends JPanel implements ActionListener{
+       
+        
+        JTextField insulinField = new JTextField();
+        JTextField glucagonField = new JTextField();
+        JButton insulinSubmit = new JButton();
+        JButton glucagonSubmit = new JButton();
+        
+        public PanelManualConfiguration(){
+         
+            // Set the layout first.
+            setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
+
+            // Set the borders.
+            setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
+
+            // Create the labels.
+            JLabel labelInsulin = new JLabel("Insulin:");
+            JLabel labelGlucagon = new JLabel("Glucagon:");
+
+           
+         /*   // Create the sliders.
+            JSlider sliderInsulin = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
+            JSlider sliderGlucagon = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
+
+            // Set labels and ticks to sliders.
+            sliderInsulin.setMinorTickSpacing(10);
+            sliderInsulin.setMajorTickSpacing(50);
+            sliderInsulin.setPaintTicks(true);
+            sliderInsulin.setPaintLabels(true);
+
+            sliderGlucagon.setMinorTickSpacing(10);
+            sliderGlucagon.setMajorTickSpacing(50);
+            sliderGlucagon.setPaintTicks(true);
+            sliderGlucagon.setPaintLabels(true);*/
+            
+            // set Label for insulin/glucagon Ineject Level.
+
+            insulinField.setText(" 00.0 ");
+
+            glucagonField.setText(" 00.0 ");
+            
+            // set button for submit
+            insulinSubmit.setText("Insulin Submit");
+            insulinSubmit.addActionListener(this);
+            
+            
+            glucagonSubmit.setText("Glucagon Submit");
+            glucagonSubmit.addActionListener(this);
+            
+            // Create the buttons.
+            JButton buttonStart = new JButton("Start Simulation");
+            JButton buttonStop = new JButton("Stop Simulation");
+
+            // Disable buttonStop by default.
+            buttonStop.setEnabled(false);
+
+            // Create the action listeners for the buttons.
+            buttonStart.addActionListener(e -> {
+                // Disable elements.
+                buttonStart.setEnabled(false);
+                insulinField.setEnabled(false);
+                glucagonField.setEnabled(false);
+
+                // Enable elements.
+                buttonStop.setEnabled(true);
+
+                // Start the simulation.
+                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()));
+            });
+
+            buttonStop.addActionListener(e -> {
+                // Disable elements.
+                buttonStop.setEnabled(false);
+
+                // Enable elements.
+                buttonStart.setEnabled(true);
+                insulinField.setEnabled(true);
+                glucagonField.setEnabled(true);
+
+                // Stop the simulation.
+                Simulation.stopSimulation();
+            });
+
+            // Add all elements together.
+
+            add(labelInsulin);
+            add(insulinField);
+            add(insulinSubmit);
+            add(Box.createRigidArea(new Dimension(25, 0)));
+            add(labelGlucagon);
+            add(glucagonField);
+            add(glucagonSubmit);
+            add(Box.createRigidArea(new Dimension(50, 0)));
+            add(buttonStart);
+            add(buttonStop);
+        }
+
+        @Override
+        public void actionPerformed(ActionEvent e) {
+          
+            if (e.getSource() == insulinSubmit) {
+                String insulindata = insulinField.getText(); //perform your operation
+                System.out.println(insulindata);
+            }
+            
+            if (e.getSource() == glucagonSubmit) {
+                String glucagondata = glucagonField.getText(); //perform your operation
+                System.out.println(glucagondata);
+            }
+            // TODO Auto-generated method stub
+            
+        }
+    }
+    
     public class PanelManual extends JPanel implements ActionListener{
 
         // Create the TextField.
@@ -104,6 +231,8 @@ class GUI {
             glucagonSubmit.setText("Glucagon Submit");
             glucagonSubmit.addActionListener(this);
 
+            
+            
             // Add all elements together.
             add(insulinStatus);
             add(insulinProgress);
@@ -226,6 +355,7 @@ class GUI {
 
         private PanelProgress() {
 
+             
             // Set the layout first.
             setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
             // Set the borders.
@@ -333,6 +463,7 @@ class GUI {
             add(buttonCake);
             add(buttonSports);
         }
-    }
+  
+ 
+}}
 
-}
