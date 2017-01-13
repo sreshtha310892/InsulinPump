@@ -5,7 +5,7 @@ import java.math.*;
 class BloodSugar {
     // Range of possible bloodsugar values: 0.0 - 200.0.
     static BigDecimal rangeMin = BigDecimal.valueOf(0.0d);
-    static BigDecimal rangeMax = BigDecimal.valueOf(200.0d);
+    static BigDecimal rangeMax = BigDecimal.valueOf(300.0d);
 
     // The starting value in the middle of the range with a perfect bloodsugar value.
     static BigDecimal initialValue = BigDecimal.valueOf(100.0d);
