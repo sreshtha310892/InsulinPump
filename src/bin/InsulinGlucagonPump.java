@@ -7,11 +7,11 @@ import main.GUI.PanelManual;
 import java.awt.*;
 import java.awt.event.*;
 
-public class InsulinGluagonPump extends JFrame {
+public class InsulinGlucagonPump extends JFrame {
 
     protected static final Component PanelManual = null;
 
-    public InsulinGluagonPump() {
+    public InsulinGlucagonPump() {
 
         JButton Manually;
         JButton Automatic;
@@ -62,7 +62,7 @@ public class InsulinGluagonPump extends JFrame {
 
     public static void main(String args[]) {
 
-        new InsulinGluagonPump();
+        new InsulinGlucagonPump();
 
     }
 

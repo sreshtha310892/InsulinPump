@@ -7,7 +7,7 @@ import org.jfree.data.time.*;
 
 import com.sun.javafx.scene.control.skin.ButtonSkin;
 
-import main.GUI.PanelProgress;
+import bin.GUI.PanelProgress;
 
 import java.awt.*;
 
