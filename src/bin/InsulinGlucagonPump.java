@@ -72,10 +72,7 @@ public class InsulinGlucagonPump extends JFrame {
                 new BloodSugar();
                 new Monitor();
                 new GUI("Manual");
-                setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
-               close();
-               
-               
+                
             }
 
         });

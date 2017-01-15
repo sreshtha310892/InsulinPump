@@ -22,7 +22,7 @@ class GUI {
 
         // Build the output window frame.
         JFrame frame = new JFrame("Insulin Glucagon Pump");
-        frame.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+        frame.setDefaultCloseOperation(WindowConstants.DISPOSE_ON_CLOSE);
         frame.getContentPane().add(new PanelAutomatic(mode));
         frame.pack();
         frame.setVisible(true);
