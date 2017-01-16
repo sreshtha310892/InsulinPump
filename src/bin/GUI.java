@@ -396,11 +396,11 @@ class GUI {
 
             // set Label for insulin/glucagon Ineject Level.
 
-            injectInsulinLabel.setText("00.0");
+            injectInsulinLabel.setText("0.00 mg/dl");
             injectInsulinLabel.setBackground(Color.red);
             injectInsulinLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-            injectGlucagonLabel.setText("00.0");
+            injectGlucagonLabel.setText("0.00 mg/dl");
             injectGlucagonLabel.setBackground(Color.yellow);
             injectGlucagonLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
