@@ -1,17 +1,31 @@
 package bin;
 
 
-import javax.swing.*;
-import java.awt.*;
+import java.awt.Color;
+import java.awt.Container;
+import java.awt.Dimension;
+import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.WindowEvent;
-import java.math.*;
+import java.math.BigDecimal;
+
+import javax.swing.BorderFactory;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JPanel;
+import javax.swing.JProgressBar;
+import javax.swing.JSlider;
+import javax.swing.JTextField;
+import javax.swing.UIManager;
+import javax.swing.WindowConstants;
 
 class GUI {
 
     public Container BOTTOM_left;
-   
+    public static InsulinReservoir inslunRes= new InsulinReservoir();
 
     GUI(String mode) {
         try {
@@ -119,7 +133,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()));
+                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()),inslunRes);
             });
 
             buttonStop.addActionListener(e -> {
@@ -166,7 +180,7 @@ class GUI {
         }
     }
     
-    public class PanelManual extends JPanel implements ActionListener{
+    public static class PanelManual extends JPanel implements ActionListener{
 
         // Create the TextField.
         JLabel bloodSugarLabel = new JLabel();
@@ -174,6 +188,9 @@ class GUI {
         JTextField glucagonField = new JTextField();
         JButton insulinSubmit = new JButton();
         JButton glucagonSubmit = new JButton();
+        // Create the progress bars.
+        public static JProgressBar insulinProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+        public static JProgressBar glucagonProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
         
         public PanelManual() {
            
@@ -184,9 +201,7 @@ class GUI {
             setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             setBackground(Color.lightGray);
 
-            // Create the progress bars.
-            JProgressBar insulinProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-            JProgressBar glucagonProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+           
 
             JLabel insulinStatus = new JLabel("Insulin Status:");
             JLabel glucagonStatus = new JLabel("Glucagon Status:");
@@ -202,7 +217,7 @@ class GUI {
             
 
             // Set ProgressBar.
-            insulinProgress.setValue(70);
+            insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);
@@ -317,7 +332,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue());
+                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes);
             });
 
             buttonStop.addActionListener(e -> {
@@ -354,7 +369,10 @@ class GUI {
         public static JLabel injectInsulinLabel = new JLabel();
         public static JLabel injectGlucagonLabel = new JLabel();
 
-        private PanelProgress() {
+     // Create the progress bars.
+        public static JProgressBar insulinProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+        public static JProgressBar glucagonProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
+        public PanelProgress() {
 
              
             // Set the layout first.
@@ -362,10 +380,6 @@ class GUI {
             // Set the borders.
             setBorder(BorderFactory.createEmptyBorder(20, 20, 20, 20));
             setBackground(Color.lightGray);
-
-            // Create the progress bars.
-            JProgressBar insulinProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
-            JProgressBar glucagonProgress = new JProgressBar(JProgressBar.HORIZONTAL, 0, 100);
 
             JLabel insulinStatus = new JLabel("Insulin Status:");
             JLabel glucagonStatus = new JLabel("Glucagon Status:");
@@ -378,7 +392,7 @@ class GUI {
             JLabel injectGlucgLabel = new JLabel("Inject Glucagon :  ");
 
             // Set ProgressBar.
-            insulinProgress.setValue(70);
+            insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);

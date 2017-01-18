@@ -1,19 +1,31 @@
 package bin;
 
-import javax.imageio.ImageIO;
-import javax.swing.*;
+import java.awt.BorderLayout;
+import java.awt.Component;
+import java.awt.Dimension;
+import java.awt.FlowLayout;
+import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.WindowEvent;
 
-import com.sun.java.swing.plaf.windows.resources.windows;
-
-import main.GUI.PanelManual;
-import sun.net.ProgressEvent;
-
-import java.awt.*;
-import java.awt.event.*;
+import javax.swing.Box;
+import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JLabel;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 public class InsulinGlucagonPump extends JFrame {
 
-    protected static final Component PanelManual = null;
+    /**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+	protected static final Component PanelManual = null;
 
     public InsulinGlucagonPump() {
 

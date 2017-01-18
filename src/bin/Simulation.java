@@ -4,7 +4,7 @@ import org.jfree.data.time.*;
 class Simulation {
     static Boolean isRunning = false;
 
-    static void startSimulation(Integer insulin, Integer glucagon) {
+    static void startSimulation(Integer insulin, Integer glucagon,InsulinReservoir insRes) {
         // Reset all data first.
         //chart.setNotify(false);
         for (Integer i = 0; i < Monitor.dataset.getSeries().size(); i++) {
@@ -26,7 +26,7 @@ class Simulation {
         new HormoneSystem(insulin, glucagon);
 
         // Start the pump system.
-        new PumpSystem(true);
+        new PumpSystem(true,insRes);
     }
 
     static void stopSimulation() {

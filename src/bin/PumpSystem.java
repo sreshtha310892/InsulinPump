@@ -2,6 +2,7 @@ package bin;
 import java.math.BigDecimal;
 import java.util.LinkedList;
 
+import bin.GUI.PanelManual;
 import bin.GUI.PanelProgress;
 
 public class PumpSystem implements Runnable {
@@ -10,11 +11,12 @@ public class PumpSystem implements Runnable {
     private Integer checkInterval = 5000;
     private Integer historyLength = 3;
     private Integer lastInjection = 0;
+    InsulinReservoir insulinReservoir;
    
 
-    PumpSystem (Boolean mode) {
+    PumpSystem (Boolean mode,InsulinReservoir insRes) {
         automaticMode = mode;
-
+        this.insulinReservoir= insRes;
         // Start data-collector thread.
         new Thread(this).start();
     }
@@ -81,6 +83,9 @@ public class PumpSystem implements Runnable {
                         // Change the bloodsugar.
         
                     	BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarAverage);
+                    	insulinReservoir.getInsulinAmount(changeValue);
+                    	PanelManual.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
+                    	PanelProgress.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
                         //BigDecimal changeValue = (bloodsugarAverage.subtract(BloodSugar.initialValue)).negate();
                         System.out.println("Bloodsugar is too high!");
                         System.out.println("Inject " + changeValue.toString() + " mg/dl Insulin ...");
