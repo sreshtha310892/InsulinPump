@@ -88,7 +88,7 @@ class GUI {
             JLabel labelGlucagon = new JLabel("Glucagon:");
 
            
-         /*   // Create the sliders.
+            // Create the sliders.
             JSlider sliderInsulin = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
             JSlider sliderGlucagon = new JSlider(JSlider.HORIZONTAL, 0, 200, 100);
 
@@ -101,11 +101,11 @@ class GUI {
             sliderGlucagon.setMinorTickSpacing(10);
             sliderGlucagon.setMajorTickSpacing(50);
             sliderGlucagon.setPaintTicks(true);
-            sliderGlucagon.setPaintLabels(true);*/
+            sliderGlucagon.setPaintLabels(true);
             
             // set Label for insulin/glucagon Ineject Level.
 
-            insulinField.setText(" 00.0 ");
+            /* insulinField.setText(" 00.0 ");
 
             glucagonField.setText(" 00.0 ");
             
@@ -115,7 +115,7 @@ class GUI {
             
             
             glucagonSubmit.setText("Glucagon Submit");
-            glucagonSubmit.addActionListener(this);
+            glucagonSubmit.addActionListener(this); */
             
             // Create the buttons.
             JButton buttonStart = new JButton("Start Simulation");
@@ -135,7 +135,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()),inslunRes,glucRes);
+                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes, glucRes);
             });
 
             buttonStop.addActionListener(e -> {
