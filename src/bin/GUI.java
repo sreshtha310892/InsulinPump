@@ -52,12 +52,8 @@ class GUI {
         public PanelAutomatic(String mode) {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
             
-            if("Manual".equals(mode)){
-              add(new PanelManualConfiguration());
-            } 
-            else{
-                add(new PanelConfiguration());   
-            }
+            add(new PanelConfiguration());   
+            
             add(new PanelMonitoring());
             if("Manual".equals(mode)) {
                 add(new PanelManual());
@@ -67,14 +63,9 @@ class GUI {
         }
     }
 
-    public class PanelManualConfiguration extends JPanel implements ActionListener{
+    /*
+    public static class PanelManualConfiguration extends JPanel implements ActionListener{
        
-        
-        JTextField insulinField = new JTextField();
-        JTextField glucagonField = new JTextField();
-        JButton insulinSubmit = new JButton();
-        JButton glucagonSubmit = new JButton();
-        
         public PanelManualConfiguration(){
          
             // Set the layout first.
@@ -115,7 +106,7 @@ class GUI {
             
             
             glucagonSubmit.setText("Glucagon Submit");
-            glucagonSubmit.addActionListener(this); */
+            glucagonSubmit.addActionListener(this); ////
             
             // Create the buttons.
             JButton buttonStart = new JButton("Start Simulation");
@@ -128,8 +119,6 @@ class GUI {
             buttonStart.addActionListener(e -> {
                 // Disable elements.
                 buttonStart.setEnabled(false);
-                insulinField.setEnabled(false);
-                glucagonField.setEnabled(false);
 
                 // Enable elements.
                 buttonStop.setEnabled(true);
@@ -144,9 +133,7 @@ class GUI {
 
                 // Enable elements.
                 buttonStart.setEnabled(true);
-                insulinField.setEnabled(true);
-                glucagonField.setEnabled(true);
-
+                
                 // Stop the simulation.
                 Simulation.stopSimulation();
             });
@@ -154,33 +141,16 @@ class GUI {
             // Add all elements together.
 
             add(labelInsulin);
-            add(insulinField);
-            add(insulinSubmit);
+            add(sliderInsulin);
             add(Box.createRigidArea(new Dimension(25, 0)));
             add(labelGlucagon);
-            add(glucagonField);
-            add(glucagonSubmit);
+            add(sliderInsulin);
             add(Box.createRigidArea(new Dimension(50, 0)));
             add(buttonStart);
             add(buttonStop);
         }
 
-        @Override
-        public void actionPerformed(ActionEvent e) {
-          
-            if (e.getSource() == insulinSubmit) {
-                String insulindata = insulinField.getText(); //perform your operation
-                System.out.println(insulindata);
-            }
-            
-            if (e.getSource() == glucagonSubmit) {
-                String glucagondata = glucagonField.getText(); //perform your operation
-                System.out.println(glucagondata);
-            }
-            // TODO Auto-generated method stub
-            
-        }
-    }
+    } */
     
     public static class PanelManual extends JPanel implements ActionListener{
 
