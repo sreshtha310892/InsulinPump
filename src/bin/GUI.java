@@ -8,6 +8,7 @@ import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 import javax.swing.BorderFactory;
 import javax.swing.Box;
@@ -287,9 +288,12 @@ class GUI {
     }
 
     // Contains the configuration for the simulation.
-    private class PanelConfiguration extends JPanel {
+    public static class PanelConfiguration extends JPanel {
 
-        private PanelConfiguration() {
+        public static JButton buttonStop;
+        public static JButton buttonStart;
+
+		public PanelConfiguration() {
             // Set the layout first.
             setLayout(new BoxLayout(this, BoxLayout.LINE_AXIS));
 
@@ -316,8 +320,8 @@ class GUI {
             sliderGlucagon.setPaintLabels(true);
 
             // Create the buttons.
-            JButton buttonStart = new JButton("Start Simulation");
-            JButton buttonStop = new JButton("Stop Simulation");
+             buttonStart = new JButton("Start Simulation");
+             buttonStop = new JButton("Stop Simulation");
 
             // Disable buttonStop by default.
             buttonStop.setEnabled(false);
@@ -405,7 +409,7 @@ class GUI {
 
             // set Text field.
 
-            bloodSugarLabel.setText("  " + BloodSugar.getBloodSugar()+ "  ");
+            bloodSugarLabel.setText("  " + BloodSugar.getBloodSugar().setScale(0, RoundingMode.HALF_UP)+ "  ");
             bloodSugarLabel.setForeground(Color.red);
             bloodSugarLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
@@ -471,9 +475,9 @@ class GUI {
             JButton buttonCoke = new JButton("Drink Coke");
             JButton buttonCake = new JButton("Eat Cake");
             JButton buttonSports = new JButton("Do Sports");
-            buttonCoke.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(25.0d), 10000));
-            buttonCake.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(50.0d), 10000));
-            buttonSports.addActionListener(e -> BloodSugar.startBloodSugChanger(BigDecimal.valueOf(-50.0d), 5000));
+            buttonCoke.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(30.0d), 5000));
+            buttonCake.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(50.0d), 5000));
+            buttonSports.addActionListener(e -> BloodSugar.startBloodSugChanger(BigDecimal.valueOf(-50.0d), 2500));
 
             add(buttonCoke);
             add(buttonCake);

@@ -41,7 +41,7 @@ class Monitor {
         plot.getRenderer().setSeriesPaint(1, Color.BLACK);
         plot.getRenderer().setSeriesPaint(2, Color.BLACK);
 
-        plot.getRenderer().setSeriesStroke(0, new BasicStroke(2.0f));
+        plot.getRenderer().setSeriesStroke(0, new BasicStroke(1.5f));
         plot.getRenderer().setSeriesStroke(1, new BasicStroke(0.25f));
         plot.getRenderer().setSeriesStroke(2, new BasicStroke(0.25f));
 
