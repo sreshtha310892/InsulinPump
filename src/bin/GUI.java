@@ -26,6 +26,7 @@ class GUI {
 
     public Container BOTTOM_left;
     public static InsulinReservoir inslunRes= new InsulinReservoir();
+    public static GlucagonReservoir glucRes= new GlucagonReservoir();
 
     GUI(String mode) {
         try {
@@ -133,7 +134,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()),inslunRes);
+                Simulation.startSimulation(Integer.parseInt(insulinField.getText()), Integer.parseInt(glucagonField.getText()),inslunRes,glucRes);
             });
 
             buttonStop.addActionListener(e -> {
@@ -233,7 +234,7 @@ class GUI {
             bloodSugarLabel.setForeground(Color.red);
             bloodSugarLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-            // set Label for insulin/glucagon Ineject Level.
+            // set Label for insulin/glucagon Inject Level.
 
             insulinField.setText(" 00.0 ");
 
@@ -332,7 +333,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes);
+                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes, glucRes);
             });
 
             buttonStop.addActionListener(e -> {
@@ -397,7 +398,7 @@ class GUI {
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);
 
-            glucagonProgress.setValue(25);
+            glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
             glucagonProgress.setBackground(Color.blue);
@@ -408,7 +409,7 @@ class GUI {
             bloodSugarLabel.setForeground(Color.red);
             bloodSugarLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
-            // set Label for insulin/glucagon Ineject Level.
+            // set Label for insulin/glucagon Inject Level.
 
             injectInsulinLabel.setText("0.00 mg/dl");
             injectInsulinLabel.setBackground(Color.red);
@@ -472,7 +473,7 @@ class GUI {
             JButton buttonSports = new JButton("Do Sports");
             buttonCoke.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(25.0d), 10000));
             buttonCake.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(50.0d), 10000));
-            buttonSports.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(-50.0d), 5000));
+            buttonSports.addActionListener(e -> BloodSugar.startBloodSugChanger(BigDecimal.valueOf(-50.0d), 5000));
 
             add(buttonCoke);
             add(buttonCake);

@@ -12,11 +12,13 @@ public class PumpSystem implements Runnable {
     private Integer historyLength = 3;
     private Integer lastInjection = 0;
     InsulinReservoir insulinReservoir;
+    GlucagonReservoir glucagonReservoir;
    
 
-    PumpSystem (Boolean mode,InsulinReservoir insRes) {
+    PumpSystem (Boolean mode,InsulinReservoir insRes, GlucagonReservoir glures) {
         automaticMode = mode;
         this.insulinReservoir= insRes;
+        this.glucagonReservoir = glures;
         // Start data-collector thread.
         new Thread(this).start();
     }
@@ -56,7 +58,9 @@ public class PumpSystem implements Runnable {
             // When it is in the dangerous range, inject glucagon immediately.
             if (bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMin) < 0) {
                 // Change the bloodsugar.
-                BigDecimal changeValue = BloodSugar.initialValue.subtract(bloodsugarValues.getLast());
+                BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
+            	glucagonReservoir.getGlucagonAmount(changeValue);
+            	PanelProgress.glucagonProgress.setValue(glucagonReservoir.getAvailable().intValue());
                 System.out.println("Bloodsugar is critical low!");
                 System.out.println("Inject " + changeValue.toString() + " mg/dl Glucagon ...");
                 BloodSugar.startBloodSugarChanger(changeValue, 0);
@@ -81,12 +85,11 @@ public class PumpSystem implements Runnable {
                     // Only inject when the average is above the safe-range and the last-value is above the safe-range too.
                     if (bloodsugarAverage.compareTo(BloodSugar.safeRangeMax) > 0 && bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMax) > 0) {
                         // Change the bloodsugar.
-        
                     	BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarAverage);
-                    	insulinReservoir.getInsulinAmount(changeValue);
-                    	PanelManual.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
-                    	PanelProgress.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
-                        //BigDecimal changeValue = (bloodsugarAverage.subtract(BloodSugar.initialValue)).negate();
+                        insulinReservoir.getInsulinAmount(changeValue);
+                       	PanelProgress.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
+                    	
+                       	//BigDecimal changeValue = (bloodsugarAverage.subtract(BloodSugar.initialValue)).negate();
                         System.out.println("Bloodsugar is too high!");
                         System.out.println("Inject " + changeValue.toString() + " mg/dl Insulin ...");
                         BloodSugar.startBloodSugarChanger(changeValue, 0);

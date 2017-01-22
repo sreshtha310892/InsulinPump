@@ -35,8 +35,8 @@ public class InsulinReservoir extends Observable {
 		    audioplayer02.playAudio(song);
 		}else if(available_amount.compareTo(new BigDecimal(5))<0 && !SimulatorUtility.mailSentIns){
 			//send emails
-			String[] recipients = new String[]{"jagruti.gunjal92@gmail.com"};
-			String[] bccRecipients = new String[]{"raka9256@gmail.com"};
+			String[] recipients = new String[]{"sreshtha310892@gmail.com"};
+			String[] bccRecipients = new String[]{"poojapatelce@gmail.com"};
 			String subject = "Patient1 pump shutdown(Insulin Reservoir is Empty)!!";
 			String messageBody = "Patient1 is not changing his insulin reservoir and the system may shut down. "
 					+ "Can lead to dangerous effects.";

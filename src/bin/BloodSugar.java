@@ -60,6 +60,8 @@ class BloodSugar {
     static BigDecimal getBloodSugar() {
         return bloodSugar;
     }
+    
+   
 
     // A thread which is running when some action happens like drinking/eating/sports.
     private static class BloodSugarChanger implements Runnable {
@@ -67,13 +69,16 @@ class BloodSugar {
         // Bloodsugar changes not directly because e.g. food has to stay in the stomach first for some time.
         private static int initialWaitingTime = 10000;
         private BigDecimal amountOfSugar;
+        private BigDecimal Sugar;
 
         BloodSugarChanger(BigDecimal amountOfSugar, int waitingTime) {
         	setSugar(amountOfSugar);
             this.amountOfSugar = amountOfSugar;
             initialWaitingTime = waitingTime;
+           
         }
 
+        
         public void run() {
             // Wait first until the sugar can react in the body.
             try {
@@ -103,6 +108,10 @@ class BloodSugar {
 
     static void startBloodSugarChanger(BigDecimal amountOfSugar, int waitingTime) {
         new Thread(new BloodSugarChanger(amountOfSugar, waitingTime)).start();
+    }
+    
+    static void startBloodSugChanger(BigDecimal Sugar, int waitingTime) {
+        new Thread(new BloodSugarChanger(Sugar, waitingTime)).start();
     }
 
 	public static BigDecimal getSugar() {
