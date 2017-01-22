@@ -1,6 +1,5 @@
 package bin;
 
-
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
@@ -44,16 +43,18 @@ class GUI {
         frame.setVisible(true);
         
         
-    }
-    
-   
-
+ }
+      
     public class PanelAutomatic extends JPanel {
         public PanelAutomatic(String mode) {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
-            
-            add(new PanelConfiguration());   
-            
+           
+            if("Manual".equals(mode)){
+                add(new PanelManualConfiguration());
+            }else
+            {
+                add(new PanelConfiguration()); 
+            }
             add(new PanelMonitoring());
             if("Manual".equals(mode)) {
                 add(new PanelManual());
@@ -63,9 +64,12 @@ class GUI {
         }
     }
 
-    /*
-    public static class PanelManualConfiguration extends JPanel implements ActionListener{
+    public static class PanelManualConfiguration extends JPanel{
        
+        public static JButton buttonStop;
+        public static JButton buttonStart;
+
+        
         public PanelManualConfiguration(){
          
             // Set the layout first.
@@ -94,23 +98,10 @@ class GUI {
             sliderGlucagon.setPaintTicks(true);
             sliderGlucagon.setPaintLabels(true);
             
-            // set Label for insulin/glucagon Ineject Level.
-
-            /* insulinField.setText(" 00.0 ");
-
-            glucagonField.setText(" 00.0 ");
-            
-            // set button for submit
-            insulinSubmit.setText("Insulin Submit");
-            insulinSubmit.addActionListener(this);
-            
-            
-            glucagonSubmit.setText("Glucagon Submit");
-            glucagonSubmit.addActionListener(this); ////
-            
+           
             // Create the buttons.
-            JButton buttonStart = new JButton("Start Simulation");
-            JButton buttonStop = new JButton("Stop Simulation");
+             buttonStart = new JButton("Start Simulation");
+             buttonStop = new JButton("Stop Simulation");
 
             // Disable buttonStop by default.
             buttonStop.setEnabled(false);
@@ -124,7 +115,7 @@ class GUI {
                 buttonStop.setEnabled(true);
 
                 // Start the simulation.
-                Simulation.startSimulation(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes, glucRes);
+                ManualSimulation.startSimulationManual(sliderInsulin.getValue(), sliderGlucagon.getValue(),inslunRes, glucRes);
             });
 
             buttonStop.addActionListener(e -> {
@@ -135,7 +126,7 @@ class GUI {
                 buttonStart.setEnabled(true);
                 
                 // Stop the simulation.
-                Simulation.stopSimulation();
+                ManualSimulation.stopSimulationManual();
             });
 
             // Add all elements together.
@@ -144,18 +135,18 @@ class GUI {
             add(sliderInsulin);
             add(Box.createRigidArea(new Dimension(25, 0)));
             add(labelGlucagon);
-            add(sliderInsulin);
+            add(sliderGlucagon);
             add(Box.createRigidArea(new Dimension(50, 0)));
             add(buttonStart);
             add(buttonStop);
         }
 
-    } */
+    }
     
     public static class PanelManual extends JPanel implements ActionListener{
 
         // Create the TextField.
-        JLabel bloodSugarLabel = new JLabel();
+        static JLabel bloodSugarManualLabel = new JLabel();
         JTextField insulinField = new JTextField();
         JTextField glucagonField = new JTextField();
         JButton insulinSubmit = new JButton();
@@ -194,16 +185,16 @@ class GUI {
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);
 
-            glucagonProgress.setValue(25);
+            glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
             glucagonProgress.setBackground(Color.blue);
 
             // set Text field.
 
-            bloodSugarLabel.setText("  " + BloodSugar.getBloodSugar()+ "  ");
-            bloodSugarLabel.setForeground(Color.red);
-            bloodSugarLabel.setBorder(BorderFactory.createLineBorder(Color.black));
+            bloodSugarManualLabel.setText("  " + BloodSugar.getBloodSugar()+ "  ");
+            bloodSugarManualLabel.setForeground(Color.red);
+            bloodSugarManualLabel.setBorder(BorderFactory.createLineBorder(Color.black));
 
             // set Label for insulin/glucagon Inject Level.
 
@@ -229,7 +220,7 @@ class GUI {
             add(glucagonProgress);
             add(Box.createRigidArea(new Dimension(50, 0)));
             add(bloodSugarLevel);
-            add(bloodSugarLabel);
+            add(bloodSugarManualLabel);
             add(Box.createRigidArea(new Dimension(75, 0)));
             add(injectInsulLabel);
             add(insulinField);

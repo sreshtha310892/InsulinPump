@@ -56,5 +56,6 @@ class HormoneSystem implements Runnable {
                 BloodSugar.changeBloodSugar(changeValue);
             }
         }
+   
     }
 }

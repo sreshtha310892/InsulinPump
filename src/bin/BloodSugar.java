@@ -103,6 +103,22 @@ class BloodSugar {
                     System.out.println(ex.toString());
                 }
             }
+            while (ManualSimulation.isRunningManual && this.amountOfSugar.compareTo(BigDecimal.ZERO) != 0) {
+                // We can change 0.1 bloodsugar every 100ms.
+                if (this.amountOfSugar.compareTo(BigDecimal.ZERO) > 0) {
+                    BloodSugar.changeBloodSugar(BigDecimal.valueOf(0.1d));
+                    this.amountOfSugar = this.amountOfSugar.subtract(BigDecimal.valueOf(0.1d));
+                } else if (this.amountOfSugar.compareTo(BigDecimal.ZERO) < 0) {
+                    BloodSugar.changeBloodSugar(BigDecimal.valueOf(-0.1d));
+                    this.amountOfSugar = this.amountOfSugar.add(BigDecimal.valueOf(0.1d));
+                }
+
+                try {
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
         }
     }
 

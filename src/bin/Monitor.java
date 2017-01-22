@@ -8,6 +8,7 @@ import org.jfree.data.time.*;
 //import com.sun.javafx.scene.control.skin.ButtonSkin;
 
 import bin.GUI.PanelProgress;
+import bin.GUI.PanelManual;
 
 import java.awt.*;
 
@@ -89,11 +90,8 @@ class Monitor {
                       	    "Emergency.",
                       	    "Emergency",
                       	    JOptionPane.ERROR_MESSAGE);
-          			
-                
-                }
-                 
-                
+          		 }
+               
                 // Adds the other fixed values.
                 BloodSugar.timeSeriesSafeRangeMin.addOrUpdate(millisecond, BloodSugar.safeRangeMin);
                 BloodSugar.timeSeriesSafeRangeMax.addOrUpdate(millisecond, BloodSugar.safeRangeMax);
@@ -105,6 +103,42 @@ class Monitor {
                     System.out.println(ex.toString());
                 }
             }
+            
+            // generated ManualSimulation is active
+            
+            while (ManualSimulation.isRunningManual) {
+                Millisecond millisecond = new Millisecond();
+
+               // Adds the new value to the TimeSeries object.
+                BloodSugar.timeSeriesBloodSugar.addOrUpdate(millisecond, BloodSugar.getBloodSugar());
+            
+                // set blood sugar value in Textfield
+                PanelManual.bloodSugarManualLabel.setText(""+BloodSugar.getBloodSugar());
+                
+                if(BloodSugar.getBloodSugar().intValue() > 250){
+                    
+                    Component frame = null;
+                    ManualSimulation.stopSimulationManual();
+                
+                    JOptionPane.showMessageDialog(frame,
+                            "Emergency.",
+                            "Emergency",
+                            JOptionPane.ERROR_MESSAGE);
+                 }
+               
+                // Adds the other fixed values.
+                BloodSugar.timeSeriesSafeRangeMin.addOrUpdate(millisecond, BloodSugar.safeRangeMin);
+                BloodSugar.timeSeriesSafeRangeMax.addOrUpdate(millisecond, BloodSugar.safeRangeMax);
+
+                try {
+                    // Wait for 100 milliseconds.
+                    Thread.sleep(100);
+                } catch (InterruptedException ex) {
+                    System.out.println(ex.toString());
+                }
+            }
+            
+            
         }
     }
 }
