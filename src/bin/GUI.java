@@ -3,6 +3,7 @@ package bin;
 import java.awt.Color;
 import java.awt.Container;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -97,11 +98,27 @@ class GUI {
             sliderGlucagon.setMajorTickSpacing(50);
             sliderGlucagon.setPaintTicks(true);
             sliderGlucagon.setPaintLabels(true);
+       
             
-           
+            
             // Create the buttons.
              buttonStart = new JButton("Start Simulation");
+             //buttonStart.setFont(Font);
+             buttonStart.setBackground(Color.GREEN);
+             buttonStart.setContentAreaFilled(false);
+             buttonStart.setOpaque(true);
+             buttonStart.setBorderPainted(false);
+            
+             Font font = new Font(buttonStart.getFont().getName(),Font.BOLD,buttonStart.getFont().getSize());
+             buttonStart.setFont(font);
+             
              buttonStop = new JButton("Stop Simulation");
+             buttonStop.setBackground(Color.RED);
+             buttonStop.setContentAreaFilled(false);
+             buttonStop.setOpaque(true);
+             buttonStop.setBorderPainted(false);
+             buttonStop.setForeground(Color.WHITE);
+             buttonStop.setFont(font);
 
             // Disable buttonStop by default.
             buttonStop.setEnabled(false);
@@ -177,17 +194,19 @@ class GUI {
             JLabel injectInsulLabel = new JLabel("Inject Insulin :   ");
             JLabel injectGlucgLabel = new JLabel("Inject Glucagon :  ");
             
-            
+            Font f = new Font(injectInsulLabel.getFont().getName(), Font.BOLD, injectInsulLabel.getFont().getSize());
 
             // Set ProgressBar.
             insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
+            insulinProgress.setFont(f);
             insulinProgress.setBackground(Color.gray);
 
             glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
+            glucagonProgress.setFont(f);
             glucagonProgress.setBackground(Color.blue);
 
             // set Text field.
