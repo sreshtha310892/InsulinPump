@@ -1,3 +1,4 @@
+
 package bin;
 
 import java.awt.Color;
@@ -13,6 +14,7 @@ import java.math.RoundingMode;
 import javax.swing.BorderFactory;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -22,6 +24,10 @@ import javax.swing.JSlider;
 import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.WindowConstants;
+
+import org.jfree.ui.Align;
+
+import com.jgoodies.forms.layout.CellConstraints.Alignment;
 
 class GUI {
 
@@ -98,27 +104,27 @@ class GUI {
             sliderGlucagon.setMajorTickSpacing(50);
             sliderGlucagon.setPaintTicks(true);
             sliderGlucagon.setPaintLabels(true);
-       
             
-            
+           
+          
             // Create the buttons.
-             buttonStart = new JButton("Start Simulation");
-             //buttonStart.setFont(Font);
-             buttonStart.setBackground(Color.GREEN);
-             buttonStart.setContentAreaFilled(false);
-             buttonStart.setOpaque(true);
-             buttonStart.setBorderPainted(false);
+            buttonStart = new JButton("Start Simulation");
+            //buttonStart.setFont(Font);
+            buttonStart.setBackground(Color.GREEN);
+            buttonStart.setContentAreaFilled(false);
+            buttonStart.setOpaque(true);
+            buttonStart.setBorderPainted(false);
+           
+            Font font = new Font(buttonStart.getFont().getName(),Font.BOLD,buttonStart.getFont().getSize());
+            buttonStart.setFont(font);
             
-             Font font = new Font(buttonStart.getFont().getName(),Font.BOLD,buttonStart.getFont().getSize());
-             buttonStart.setFont(font);
-             
-             buttonStop = new JButton("Stop Simulation");
-             buttonStop.setBackground(Color.RED);
-             buttonStop.setContentAreaFilled(false);
-             buttonStop.setOpaque(true);
-             buttonStop.setBorderPainted(false);
-             buttonStop.setForeground(Color.WHITE);
-             buttonStop.setFont(font);
+            buttonStop = new JButton("Stop Simulation");
+            buttonStop.setBackground(Color.RED);
+            buttonStop.setContentAreaFilled(false);
+            buttonStop.setOpaque(true);
+            buttonStop.setBorderPainted(false);
+            buttonStop.setForeground(Color.WHITE);
+            buttonStop.setFont(font);
 
             // Disable buttonStop by default.
             buttonStop.setEnabled(false);
@@ -194,19 +200,17 @@ class GUI {
             JLabel injectInsulLabel = new JLabel("Inject Insulin :   ");
             JLabel injectGlucgLabel = new JLabel("Inject Glucagon :  ");
             
-            Font f = new Font(injectInsulLabel.getFont().getName(), Font.BOLD, injectInsulLabel.getFont().getSize());
+            
 
             // Set ProgressBar.
             insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
-            insulinProgress.setFont(f);
             insulinProgress.setBackground(Color.gray);
 
             glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
-            glucagonProgress.setFont(f);
             glucagonProgress.setBackground(Color.blue);
 
             // set Text field.
@@ -300,8 +304,23 @@ class GUI {
             sliderGlucagon.setPaintLabels(true);
 
             // Create the buttons.
-             buttonStart = new JButton("Start Simulation");
-             buttonStop = new JButton("Stop Simulation");
+            buttonStart = new JButton("Start Simulation");
+            //buttonStart.setFont(Font);
+            buttonStart.setBackground(Color.GREEN);
+            buttonStart.setContentAreaFilled(false);
+            buttonStart.setOpaque(true);
+            buttonStart.setBorderPainted(false);
+           
+            Font font = new Font(buttonStart.getFont().getName(),Font.BOLD,buttonStart.getFont().getSize());
+            buttonStart.setFont(font);
+            
+            buttonStop = new JButton("Stop Simulation");
+            buttonStop.setBackground(Color.RED);
+            buttonStop.setContentAreaFilled(false);
+            buttonStop.setOpaque(true);
+            buttonStop.setBorderPainted(false);
+            buttonStop.setForeground(Color.WHITE);
+            buttonStop.setFont(font);
 
             // Disable buttonStop by default.
             buttonStop.setEnabled(false);
@@ -441,7 +460,9 @@ class GUI {
         }
     }
 
-    private class PanelInteractions extends JPanel {
+    private class PanelInteractions extends JPanel  {
+
+        
 
         private PanelInteractions() {
             // Set the layout first.
@@ -452,13 +473,18 @@ class GUI {
 
             setBackground(Color.LIGHT_GRAY);
 
+           
             JButton buttonCoke = new JButton("Drink Coke");
             JButton buttonCake = new JButton("Eat Cake");
             JButton buttonSports = new JButton("Do Sports");
+           
             buttonCoke.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(30.0d), 5000));
             buttonCake.addActionListener(e -> BloodSugar.startBloodSugarChanger(BigDecimal.valueOf(50.0d), 5000));
             buttonSports.addActionListener(e -> BloodSugar.startBloodSugChanger(BigDecimal.valueOf(-50.0d), 2500));
 
+            buttonCake.setIcon(new ImageIcon(((new ImageIcon("E:/programm/InsulinGlucagon/image/Cake.png")).getImage()).getScaledInstance(50, 50,java.awt.Image.SCALE_SMOOTH)));
+            buttonCoke.setIcon(new ImageIcon(((new ImageIcon("E:/programm/InsulinGlucagon/image/Cola.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
+            buttonSports.setIcon(new ImageIcon(((new ImageIcon("E:/programm/InsulinGlucagon/image/Sports.png")).getImage()).getScaledInstance(50, 50, java.awt.Image.SCALE_SMOOTH)));
             add(buttonCoke);
             add(buttonCake);
             add(buttonSports);
