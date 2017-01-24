@@ -27,8 +27,6 @@ import javax.swing.WindowConstants;
 
 import org.jfree.ui.Align;
 
-import com.jgoodies.forms.layout.CellConstraints.Alignment;
-
 class GUI {
 
     public Container BOTTOM_left;
@@ -200,19 +198,21 @@ class GUI {
             JLabel injectInsulLabel = new JLabel("Inject Insulin :   ");
             JLabel injectGlucgLabel = new JLabel("Inject Glucagon :  ");
             
-            
+            Font font = new Font(injectInsulLabel.getFont().getName(),Font.BOLD,injectInsulLabel.getFont().getSize());
 
             // Set ProgressBar.
             insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);
+            insulinProgress.setFont(font);
 
             glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
             glucagonProgress.setBackground(Color.blue);
-
+            glucagonProgress.setFont(font);
+            
             // set Text field.
 
             bloodSugarManualLabel.setText("  " + BloodSugar.getBloodSugar()+ "  ");
@@ -226,11 +226,13 @@ class GUI {
             glucagonField.setText(" 00.0 ");
             
             // set button for submit
-            insulinSubmit.setText("Insulin Submit");
+            insulinSubmit.setText("Inject Insulin");
+            insulinSubmit.setFont(font);
             insulinSubmit.addActionListener(this);
             
             
-            glucagonSubmit.setText("Glucagon Submit");
+            glucagonSubmit.setText("Inject Glucagon");
+            glucagonSubmit.setFont(font);
             glucagonSubmit.addActionListener(this);
 
             
@@ -395,17 +397,21 @@ class GUI {
             JLabel injectInsulLabel = new JLabel("Inject Insulin :   ");
             JLabel injectGlucgLabel = new JLabel("Inject Glucagon :  ");
 
+            Font font = new Font(injectInsulLabel.getFont().getName(),Font.BOLD,injectInsulLabel.getFont().getSize());
+            
             // Set ProgressBar.
             insulinProgress.setValue(inslunRes.getAvailable().intValueExact());
             insulinProgress.setStringPainted(true);
             insulinProgress.setString("Insulin");
             insulinProgress.setBackground(Color.gray);
+            insulinProgress.setFont(font);
 
             glucagonProgress.setValue(glucRes.getAvailable().intValueExact());
             glucagonProgress.setStringPainted(true);
             glucagonProgress.setString("Glucagon");
             glucagonProgress.setBackground(Color.blue);
-
+            glucagonProgress.setFont(font);
+            
             // set Text field.
 
             bloodSugarLabel.setText("  " + BloodSugar.getBloodSugar().setScale(0, RoundingMode.HALF_UP)+ "  ");
