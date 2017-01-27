@@ -7,6 +7,7 @@ import bin.GUI.PanelProgress;
 
 public class PumpSystem implements Runnable {
     private static final BigDecimal BigDecimal = null;
+    static BigDecimal changeValueInsulin;
     private Boolean automaticMode;
     private Boolean manualMode;
     private LinkedList<BigDecimal> bloodsugarValues = new LinkedList<BigDecimal>();
@@ -15,8 +16,8 @@ public class PumpSystem implements Runnable {
     private Integer lastInjection = 0;
     InsulinReservoir insulinReservoir;
     GlucagonReservoir glucagonReservoir;
-    static BigDecimal changeValueInsulin;
-    BigDecimal changeValueGlucagon;
+  
+   // static  BigDecimal changeValueGlucagon;
    
 
     PumpSystem (String mode,InsulinReservoir insRes, GlucagonReservoir glures) {
@@ -81,23 +82,15 @@ public class PumpSystem implements Runnable {
             }
         }
         
-        
-        
-        
     }
 
     public void checkAndInjectManually() {
-        
-        System.out.println("Inside Manual check Inject:=-----");
+      
+       // System.out.println("Inside Manual check Inject:=-----");
         
         if (bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMin) < 0) {
             // Change the bloodsugar.
-            
-            
-          //  BigDecimal changeValue = InsulinGlucagonManualCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
-         
-           
-           
+           // BigDecimal changeValue = InsulinGlucagonManualCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
             glucagonReservoir.getGlucagonAmount(changeValueInsulin);
             PanelProgress.glucagonProgress.setValue(glucagonReservoir.getAvailable().intValue());
             System.out.println("Bloodsugar is critical low!");
@@ -126,6 +119,7 @@ public class PumpSystem implements Runnable {
                 if (bloodsugarAverage.compareTo(BloodSugar.safeRangeMax) > 0 && bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMax) > 0) {
                     // Change the bloodsugar.
                  //   BigDecimal changeValue = InsulinGlucagonManualCalculation.dose(BloodSugar.getSugar(),bloodsugarAverage);
+                 
                     insulinReservoir.getInsulinAmount(changeValueInsulin);
                     PanelProgress.insulinProgress.setValue(insulinReservoir.getAvailable().intValue());
                     
@@ -154,15 +148,16 @@ public class PumpSystem implements Runnable {
             // When it is in the dangerous range, inject glucagon immediately.
             if (bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMin) < 0) {
                 // Change the bloodsugar.
-                BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
-            	glucagonReservoir.getGlucagonAmount(changeValue);
+              //  BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
+            	
+                glucagonReservoir.getGlucagonAmount(changeValueInsulin);
             	PanelProgress.glucagonProgress.setValue(glucagonReservoir.getAvailable().intValue());
                 System.out.println("Bloodsugar is critical low!");
-                System.out.println("Inject " + changeValue.toString() + " mg/dl Glucagon ...");
-                BloodSugar.startBloodSugarChanger(changeValue, 0);
+                System.out.println("Inject " + changeValueInsulin.toString() + " mg/dl Glucagon ...");
+                BloodSugar.startBloodSugarChanger(changeValueInsulin, 0);
                 
                 // set value for insulin mg/dl in Label
-                 PanelProgress.injectGlucagonLabel.setText(""+changeValue.toString()+" mg/dl");
+                 PanelProgress.injectGlucagonLabel.setText(""+changeValueInsulin.toString()+" mg/dl");
                 // Reset last injection.
                 lastInjection = 0;
             } else {

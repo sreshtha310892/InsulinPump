@@ -8,7 +8,7 @@ import javax.sound.sampled.DataLine;
 import javax.sound.sampled.SourceDataLine;
 import javax.swing.JFrame;
 
-public class AudioPlayer02 extends JFrame{
+public class AudioPlayer extends JFrame{
 
 	private static final long serialVersionUID = 1L;
 	AudioFormat audioFormat;
@@ -16,7 +16,7 @@ public class AudioPlayer02 extends JFrame{
 	SourceDataLine sourceDataLine;
 	boolean stopPlayback = false;
 
-	public AudioPlayer02(){
+	public AudioPlayer(){
 		
 	}
 	

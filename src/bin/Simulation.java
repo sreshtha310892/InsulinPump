@@ -20,7 +20,7 @@ class Simulation {
         }
         //chart.setNotify(true);
 
-        // Reset the value of the bloodsugar1 .
+        // Reset the value of the bloodsugar.
         BloodSugar.resetBloodSugar();
 
         // Set flag.

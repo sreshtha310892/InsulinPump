@@ -12,7 +12,7 @@ public class InsulinReservoir extends Observable {
 	
 	private BigDecimal tank_capacity = new BigDecimal(100); //units
 	private BigDecimal available_amount = tank_capacity  ;
-	AudioPlayer02 audioplayer02 = new AudioPlayer02();
+	AudioPlayer audioplayer02 = new AudioPlayer();
 	
 	public InsulinReservoir(){
 		
@@ -31,7 +31,7 @@ public class InsulinReservoir extends Observable {
 
 	public BigDecimal getAvailable(){
 		if(available_amount.compareTo(new BigDecimal(20))<0 && available_amount.compareTo(new BigDecimal(5))>0){
-			String song="C:\\Users\\RAKA\\Desktop\\scs\\beep-09.wav";
+			String song="E:\\programm\\InsulinGlucagon\\sound\beep.wav";
 		    audioplayer02.playAudio(song);
 		}else if(available_amount.compareTo(new BigDecimal(5))<0 && !SimulatorUtility.mailSentIns){
 			//send emails
