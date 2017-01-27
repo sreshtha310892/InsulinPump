@@ -33,7 +33,7 @@ class Simulation {
         new HormoneSystem(insulin, glucagon);
 
         // Start the pump system.
-        new PumpSystem(true,insRes, glures);
+        new PumpSystem("auto",insRes, glures);
     }
 
     static void stopSimulation() {

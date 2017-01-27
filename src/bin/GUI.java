@@ -168,7 +168,7 @@ class GUI {
 
         // Create the TextField.
         static JLabel bloodSugarManualLabel = new JLabel();
-        JTextField insulinField = new JTextField();
+       static  JTextField insulinField = new JTextField();
         JTextField glucagonField = new JTextField();
         JButton insulinSubmit = new JButton();
         JButton glucagonSubmit = new JButton();
@@ -257,18 +257,30 @@ class GUI {
         }
 
         @Override
-        public void actionPerformed(ActionEvent e) {
+        public  void actionPerformed(ActionEvent e) {
             if (e.getSource() == insulinSubmit) {
-                String insulindata = insulinField.getText(); //perform your operation
-                System.out.println(insulindata);
+                
+            //    BigDecimal insulindate1 = insulinField.get
+                BigDecimal insulinData = new BigDecimal(insulinField.getText()); //perform your operation
+               // BigDecimal glucagonData = new BigDecimal(glucagonField.getText());
+              
+            //  System.out.println(glucagonData);
+              System.out.println(insulinData);
+                
+               PumpSystem.changeValueInsulin = insulinData;
+                InsulinGlucagonManualCalculation.insulinDose =insulinData;
+                InsulinReservoir inRes = new InsulinReservoir();
+                inRes.setInsulin(BigDecimal.TEN);
+                GlucagonReservoir glures = new GlucagonReservoir();
+                glures.setGlucagon(BigDecimal.TEN);
+                new PumpSystem("manual", inRes, glures);
             }
             
-            if (e.getSource() == glucagonSubmit) {
-                String glucagondata = glucagonField.getText(); //perform your operation
-                System.out.println(glucagondata);
-            }
+            
              
        }
+       
+       
 
        
     }

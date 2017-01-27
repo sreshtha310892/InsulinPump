@@ -40,7 +40,7 @@ public class InsulinGlucagonPump extends JFrame {
         setVisible(true);
 
         setLayout(new BorderLayout());
-        setContentPane(new JLabel(new ImageIcon("C:\\Users\\Hardik\\Desktop\\insulin.jpg")));
+        setContentPane(new JLabel(new ImageIcon("E:/programm/InsulinGlucagon/image/insulin.jpg")));
         setLayout(new FlowLayout());
         
         
