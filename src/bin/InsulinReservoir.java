@@ -21,8 +21,7 @@ public class InsulinReservoir extends Observable {
 		available_amount = tank_capacity; 
 		
 	}
-
-	public BigDecimal getInsulinAmount(BigDecimal amount) {
+public BigDecimal getInsulinAmount(BigDecimal amount) {
 		available_amount = available_amount.subtract(amount);
 		setChanged();
 		notifyObservers(InsulinReservoir);

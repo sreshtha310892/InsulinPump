@@ -28,9 +28,7 @@ public class ManualSimulation {
 
             // Start the hormone system.
         //    new HormoneSystem(insulin, glucagon);
-
-          
-        }
+ }
 
         static void stopSimulationManual() {
             // Set flag.

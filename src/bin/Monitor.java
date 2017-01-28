@@ -34,8 +34,7 @@ class Monitor {
                 false,
                 false
         );
-
-        // Define a plot and set colors/thicknesses.
+// Define a plot and set colors/thicknesses.
         final XYPlot plot = chart.getXYPlot();
         plot.setBackgroundPaint(Color.LIGHT_GRAY);
         plot.getRenderer().setSeriesPaint(0, Color.RED);

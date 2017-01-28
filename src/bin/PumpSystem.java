@@ -18,8 +18,6 @@ public class PumpSystem implements Runnable {
     GlucagonReservoir glucagonReservoir;
   
    // static  BigDecimal changeValueGlucagon;
-   
-
     PumpSystem (String mode,InsulinReservoir insRes, GlucagonReservoir glures) {
         if("manual".equals(mode)) {
             manualMode = true;

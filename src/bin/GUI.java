@@ -49,8 +49,6 @@ class GUI {
         frame.getContentPane().add(new PanelAutomatic(mode));
         frame.pack();
         frame.setVisible(true);
-        
-        
  }
       // 
     public class PanelAutomatic extends JPanel {

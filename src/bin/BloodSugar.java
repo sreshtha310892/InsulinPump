@@ -32,8 +32,7 @@ class BloodSugar {
         timeSeriesSafeRangeMin = new TimeSeries("SafeRange Minimum");
         timeSeriesSafeRangeMax = new TimeSeries("SafeRange Maximum");
     }
-
-    static void resetBloodSugar() {
+  static void resetBloodSugar() {
         bloodSugar = initialValue;
     }
 

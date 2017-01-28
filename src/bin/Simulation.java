@@ -35,8 +35,7 @@ class Simulation {
         // Start the pump system.
         new PumpSystem("auto",insRes, glures);
     }
-
-    static void stopSimulation() {
+  static void stopSimulation() {
         // Set flag.
         
         PanelConfiguration.buttonStop.setEnabled(false);

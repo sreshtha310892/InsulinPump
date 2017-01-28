@@ -6,7 +6,6 @@ import java.math.RoundingMode;
 public class InsulinGlucagonCalculation {
 	
 	public static BigDecimal weight = new BigDecimal(70.00);
-		
 	//Calculation of total dosage
 	public static BigDecimal dose(BigDecimal sugar, BigDecimal bloodsugarLevel){
 		BigDecimal requirement = weight.multiply(new BigDecimal (0.55));

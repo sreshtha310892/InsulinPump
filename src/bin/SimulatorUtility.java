@@ -28,8 +28,7 @@ public class SimulatorUtility {
 	public static long injectedTime=0;
 
 	public static String getCurrentTime(int minutes) {
-
-		// 24 hours format
+	// 24 hours format
 		SimpleDateFormat df = new SimpleDateFormat("HH:mm");
 
 		Calendar cal = Calendar.getInstance();
