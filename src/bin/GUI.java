@@ -52,7 +52,7 @@ class GUI {
         
         
  }
-      
+      // 
     public class PanelAutomatic extends JPanel {
         public PanelAutomatic(String mode) {
             setLayout(new BoxLayout(this, BoxLayout.PAGE_AXIS));
