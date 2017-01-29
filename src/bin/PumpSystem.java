@@ -148,16 +148,16 @@ public class PumpSystem implements Runnable {
             // When it is in the dangerous range, inject glucagon immediately.
             if (bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMin) < 0) {
                 // Change the bloodsugar.
-              //  BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
+                BigDecimal changeValue = InsulinGlucagonCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
             	
-                glucagonReservoir.getGlucagonAmount(changeValueInsulin);
+                glucagonReservoir.getGlucagonAmount(changeValue);
             	PanelProgress.glucagonProgress.setValue(glucagonReservoir.getAvailable().intValue());
                 System.out.println("Bloodsugar is critical low!");
-                System.out.println("Inject " + changeValueInsulin.toString() + " mg/dl Glucagon ...");
-                BloodSugar.startBloodSugarChanger(changeValueInsulin, 0);
+                System.out.println("Inject " + changeValue.toString() + " mg/dl Glucagon ...");
+                BloodSugar.startBloodSugarChanger(changeValue, 0);
                 
                 // set value for insulin mg/dl in Label
-                 PanelProgress.injectGlucagonLabel.setText(""+changeValueInsulin.toString()+" mg/dl");
+                 PanelProgress.injectGlucagonLabel.setText(""+changeValue.toString()+" mg/dl");
                 // Reset last injection.
                 lastInjection = 0;
             } else {
