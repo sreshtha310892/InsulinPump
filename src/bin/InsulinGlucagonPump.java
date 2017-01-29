@@ -77,9 +77,7 @@ public class InsulinGlucagonPump extends JFrame {
               
                 // TODO Auto-generated method stub
              
-                new BloodSugar();
-                new Monitor();
-                new GUI("Manual");
+                new Login ();
                 
             }
 
