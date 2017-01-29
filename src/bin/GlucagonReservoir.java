@@ -14,6 +14,7 @@ public class GlucagonReservoir extends Observable {
 	AudioPlayer audioplayer02 = new AudioPlayer();
 	
 	public GlucagonReservoir(){
+		
 	}
 	public void refill() {
 		available_amount = tank_capacity;  

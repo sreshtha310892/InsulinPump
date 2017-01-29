@@ -28,7 +28,8 @@ class HormoneSystem implements Runnable {
         // Start the hormone system.
         new Thread(this).start();
     }
-  public void run() {
+
+    public void run() {
         // Only generate data when the simulation is active.
         while (Simulation.isRunning) {
             // Basically we can change 1 bloodsugar in 2 seconds.

@@ -32,7 +32,8 @@ public class InsulinGlucagonPump extends JFrame {
         JButton Manually;
         JButton Automatic;
        
-       setTitle("Insulin/Glucagon Pump");
+        
+        setTitle("Insulin/Glucagon Pump");
         setSize(400, 400);
         setLocationRelativeTo(null);
         setDefaultCloseOperation(EXIT_ON_CLOSE);

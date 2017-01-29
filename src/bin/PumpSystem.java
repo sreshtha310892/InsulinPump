@@ -18,6 +18,8 @@ public class PumpSystem implements Runnable {
     GlucagonReservoir glucagonReservoir;
   
    // static  BigDecimal changeValueGlucagon;
+   
+
     PumpSystem (String mode,InsulinReservoir insRes, GlucagonReservoir glures) {
         if("manual".equals(mode)) {
             manualMode = true;
@@ -88,7 +90,7 @@ public class PumpSystem implements Runnable {
         
         if (bloodsugarValues.getLast().compareTo(BloodSugar.safeRangeMin) < 0) {
             // Change the bloodsugar.
-           // BigDecimal changeValue = InsulinGlucagonManualCalculation.dose(BloodSugar.getSugar(),bloodsugarValues.getLast());
+          
             glucagonReservoir.getGlucagonAmount(changeValueInsulin);
             PanelProgress.glucagonProgress.setValue(glucagonReservoir.getAvailable().intValue());
             System.out.println("Bloodsugar is critical low!");
