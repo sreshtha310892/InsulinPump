@@ -11,8 +11,8 @@ class BloodSugar {
     static BigDecimal initialValue = BigDecimal.valueOf(100.0d);
 
     // Safe area for the bloodsugar: 60.0 - 140.0.
-    static BigDecimal safeRangeMin = BigDecimal.valueOf(60.0d);
-    static BigDecimal safeRangeMax = BigDecimal.valueOf(140.0d);
+    static BigDecimal safeRangeMin = BigDecimal.valueOf(70.0d);
+    static BigDecimal safeRangeMax = BigDecimal.valueOf(130.0d);
 
     // Contains the actual bloodsugar value.
     private static BigDecimal bloodSugar;

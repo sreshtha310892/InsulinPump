@@ -11,7 +11,9 @@ public class PumpSystem implements Runnable {
     private Boolean automaticMode;
     private Boolean manualMode;
     private LinkedList<BigDecimal> bloodsugarValues = new LinkedList<BigDecimal>();
-    private Integer checkInterval = 5000;
+    private Integer checkInterval = 3000; 
+    private Integer checkIntervalManual = 2500;
+    private Integer historyLengthManual = 1;
     private Integer historyLength = 3;
     private Integer lastInjection = 0;
     InsulinReservoir insulinReservoir;
@@ -62,7 +64,7 @@ public class PumpSystem implements Runnable {
         
         while (ManualSimulation.isRunningManual) {
             // Make sure that we have only n-elements of history data.
-            if (bloodsugarValues.size() == historyLength) {
+            if (bloodsugarValues.size() == historyLengthManual) {
                 bloodsugarValues.removeFirst();
             }
 
@@ -76,7 +78,7 @@ public class PumpSystem implements Runnable {
 
            // We check the bloodsugar values only in a certain interval.
             try {
-                Thread.sleep(checkInterval);
+                Thread.sleep(checkIntervalManual);
             } catch (InterruptedException ex) {
                 System.out.println(ex.toString());
             }
@@ -104,8 +106,7 @@ public class PumpSystem implements Runnable {
         }
         else {
             // We need at least a full record of history-values.
-            if (bloodsugarValues.size() == historyLength) {
-                // Calculate the average value based on history values.
+                           // Calculate the average value based on history values.
                 // To ensure that we dont depend too much on strong
                 // temporary deviations to the bloodsugar, we want a full
                 // set of history data.
@@ -136,7 +137,7 @@ public class PumpSystem implements Runnable {
                 }
             
             }
-        }
+        
         // TODO Auto-generated method stub
         
     }

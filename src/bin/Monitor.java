@@ -78,7 +78,7 @@ class Monitor {
                 // set blood sugar value in Textfield
                 PanelProgress.bloodSugarLabel.setText(""+BloodSugar.getBloodSugar());
                 
-                if(BloodSugar.getBloodSugar().intValue() > 250){
+                if(BloodSugar.getBloodSugar().intValue() > 250 || BloodSugar.getBloodSugar().intValue() < 50){
                   	
                   	Component frame = null;
                   	Simulation.stopSimulation();
@@ -87,7 +87,7 @@ class Monitor {
                   	
                   	
           			JOptionPane.showMessageDialog(frame,
-                      	    "Emergency.",
+                      	    "Imidiately Consult Doctor!!",
                       	    "Emergency",
                       	    JOptionPane.ERROR_MESSAGE);
           		 }
@@ -115,13 +115,13 @@ class Monitor {
                 // set blood sugar value in Textfield
                 PanelManual.bloodSugarManualLabel.setText(""+BloodSugar.getBloodSugar());
                 
-                if(BloodSugar.getBloodSugar().intValue() > 250){
+                if(BloodSugar.getBloodSugar().intValue() > 250 || BloodSugar.getBloodSugar().intValue() < 50){
                     
                     Component frame = null;
                     ManualSimulation.stopSimulationManual();
                 
                     JOptionPane.showMessageDialog(frame,
-                            "Emergency.",
+                            "Imidiately Consult Doctor!!",
                             "Emergency",
                             JOptionPane.ERROR_MESSAGE);
                  }
