@@ -19,7 +19,7 @@ public class PumpSystem implements Runnable {
     InsulinReservoir insulinReservoir;
     GlucagonReservoir glucagonReservoir;
   
-   // static  BigDecimal changeValueGlucagon;
+   // static  BigDecimal changeValueGlucagon ;
    
 
     PumpSystem (String mode,InsulinReservoir insRes, GlucagonReservoir glures) {
